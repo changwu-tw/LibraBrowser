@@ -80,7 +80,7 @@ def get_acct_raw(acct):
 
 def get_acct_info(state):
     try:
-        #struct inferred from: https://github.com/libra/libra/blob/9f4ea4b4123204b82c16438accb9526d28fa910b/types/src/account_config.rs#L147-L152
+        #struct inferred from: https://github.com/libra/libra/blob/master/types/src/account_config.rs#L147-L152
         acct_state = struct.unpack_from('=32sQ?QQQ', state.account_state_with_proof.blob.blob,
                            len(state.account_state_with_proof.blob.blob) - struct.calcsize('=32sQ?QQQ'))
 
@@ -93,7 +93,7 @@ def get_acct_info(state):
     except:
         logger.exception('exception in get_acct_info')
 
-    return account, balance, sq_num, sent_events, recv_events
+    return account, balance, sq_num, sent_events, recv_events, delegated_withdrawal_cap
 
 
 def get_raw_tx_lst(version, limit):
